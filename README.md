@@ -8,7 +8,7 @@
 
 ## 安裝與執行步驟
 先點選"Clone or download/Download ZIP"把檔案下載下來，解壓縮
-![GITHUB](/public/img/down.png)
+![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/down.PNG)
 
 使用終端機(Terminal)
 切換到restaurant_list目錄下
@@ -31,6 +31,6 @@ nodemon app.js
 - 使用者可以透過搜尋餐廳名稱來找到特定的店家資料
 
 ## 專案畫面
-![GITHUB](/public/img/show1.png)
-![GITHUB](/public/img/show2.png)
-![GITHUB](/public/img/show3.png)
+![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/show1.PNG)
+![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/show2.PNG)
+![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/show3.PNG)
