@@ -8,17 +8,29 @@
 
 ## 安裝與執行步驟
 先點選"Clone or download/Download ZIP"把檔案下載下來，解壓縮
+![GITHUB](/public/img/down.png)
 
 使用終端機(Terminal)
 切換到restaurant_list目錄下
-    cd restaurant_list
+‵‵‵
+cd restaurant_list
+‵‵‵
 安裝套件
-    npm install
+‵‵‵
+npm install
+‵‵‵
 使用nodem使用啟動伺服器 
-    nodemon app.js
+‵‵‵
+nodemon app.js
+‵‵‵
 在瀏覽器輸入網址 `localhost:3000`即可看到內容
 
 ## 功能描述
 - 在首頁列出所有的餐廳清單
 - 針對每間餐廳，使用者都可以點進去看詳細描述
 - 使用者可以透過搜尋餐廳名稱來找到特定的店家資料
+
+## 專案畫面
+![GITHUB](/public/img/show1.png)
+![GITHUB](/public/img/show2.png)
+![GITHUB](/public/img/show3.png)
