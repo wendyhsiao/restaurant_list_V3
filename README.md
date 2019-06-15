@@ -12,17 +12,23 @@
 
 使用終端機(Terminal)
 切換到restaurant_list目錄下
+
 ‵‵‵
 cd restaurant_list
 ‵‵‵
+
 安裝套件
+
 ‵‵‵
 npm install
 ‵‵‵
+
 使用nodem使用啟動伺服器 
+
 ‵‵‵
 nodemon app.js
 ‵‵‵
+
 在瀏覽器輸入網址 `localhost:3000`即可看到內容
 
 ## 功能描述
