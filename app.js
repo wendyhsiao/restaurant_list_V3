@@ -4,11 +4,29 @@ const app = express()
 const port = 3000
 // require express-handlebars here
 const exphbs = require('express-handlebars')
-const restaurantList = require('./restaurant.json')
+// const restaurantList = require('./restaurant.json') *mongoose取代
+const mongoose = require('mongoose')
 
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+mongoose.connect('mongodb://127.0.0.1/restaurant', { useNewUrlParser: true })
+
+// mongoose 連線後透過 mongoose.connection 拿到 Connection 的物件
+const db = mongoose.connection
+
+// 連線異常
+db.on('error', () => {
+  console.log('mongodb error')
+})
+
+// 連線成功
+db.once('open', () => {
+  console.log('mongodb connected')
+})
+// 載入Restaurant Model
+const Restaurant = require('./models/restaurant')
 
 // setting static files
 app.use(express.static('public'))
