@@ -73,13 +73,37 @@ app.post('/restaurants', (req, res) => {
 // 顯示一筆 Restaurant 的詳細內容
 app.get('/restaurants/:restaurant_id', (req, res) => {
   Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
-    console.log('params', req.params)
     if (err) return console.error(err)
     return res.render('show', { restaurant: restaurant })
   })
 })
-// const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-// res.render('show', { restaurant: restaurant })
+
+// 修改 Restaurant 頁面
+app.get('/restaurants/:restaurant_id/edit', (req, res) => {
+  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('edit', { restaurant: restaurant })
+  })
+})
+
+app.post('/restaurants/:restaurant_id', (req, res) => {
+  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.name = req.body.name
+    restaurant.name_en = req.body.name_en
+    restaurant.category = req.body.category
+    restaurant.image = req.body.image
+    restaurant.location = req.body.location
+    restaurant.phone = req.body.phone
+    restaurant.google_map = req.body.google_map
+    restaurant.rating = req.body.rating
+    restaurant.description = req.body.description
+    restaurant.save(err => {
+      if (err) return console.error(err)
+      return res.redirect(`/restaurants/${req.params.restaurant_id}`)
+    })
+  })
+})
 
 app.get('/search', (req, res) => {
   // console.log('req.query', req.query)
