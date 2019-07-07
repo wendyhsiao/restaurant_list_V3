@@ -4,6 +4,7 @@ const app = express()
 const port = 3000
 // require express-handlebars here
 const exphbs = require('express-handlebars')
+
 // const restaurantList = require('./restaurant.json') *mongoose取代
 const mongoose = require('mongoose')
 
@@ -31,9 +32,14 @@ const Restaurant = require('./models/restaurant')
 // setting static files
 app.use(express.static('public'))
 
+
 // routes setting
 app.get('/', (req, res) => {
-  res.render('index', { restaurant: restaurantList.results })
+  Restaurant.find((err, restaurants) => {
+    if (err) return console.error(err)
+    return res.render('index', { restaurants: restaurants })
+  })
+  // res.render('index', { restaurant: restaurantList.results })
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
