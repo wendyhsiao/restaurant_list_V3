@@ -70,18 +70,22 @@ app.post('/restaurants', (req, res) => {
   })
 })
 
-
-
+// 顯示一筆 Restaurant 的詳細內容
 app.get('/restaurants/:restaurant_id', (req, res) => {
-
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurant })
+  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+    console.log('params', req.params)
+    if (err) return console.error(err)
+    return res.render('show', { restaurant: restaurant })
+  })
 })
+// const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
+// res.render('show', { restaurant: restaurant })
 
 app.get('/search', (req, res) => {
   // console.log('req.query', req.query)
   const keyword = req.query.keyword
-  const restaurant = restaurantList.results.filter(restaurant => {
+  // const restaurant = restaurantList.results.filter(restaurant 
+  const restaurant = restaurant.results.filter(restaurant => {
     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
   })
   res.render('index', { restaurant: restaurant, keyword: keyword })
