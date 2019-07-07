@@ -105,6 +105,17 @@ app.post('/restaurants/:restaurant_id', (req, res) => {
   })
 })
 
+// 刪除 Restaurant
+app.post('/restaurants/:restaurant_id/delete', (req, res) => {
+  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.remove(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
+  })
+})
+
 app.get('/search', (req, res) => {
   // console.log('req.query', req.query)
   const keyword = req.query.keyword
