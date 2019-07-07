@@ -5,6 +5,10 @@ const port = 3000
 // require express-handlebars here
 const exphbs = require('express-handlebars')
 
+// 引用、設定 body-parser
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // const restaurantList = require('./restaurant.json') *mongoose取代
 const mongoose = require('mongoose')
 
@@ -41,6 +45,32 @@ app.get('/', (req, res) => {
   })
   // res.render('index', { restaurant: restaurantList.results })
 })
+
+// 新增一筆 Restaurant 頁面
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  const restaurant = new Restaurant({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description,
+  })
+
+  restaurant.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')
+  })
+})
+
+
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
 
