@@ -30,6 +30,7 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected')
 })
+
 // 載入Restaurant Model
 const Restaurant = require('./models/restaurant')
 
@@ -116,11 +117,12 @@ app.post('/restaurants/:restaurant_id/delete', (req, res) => {
   })
 })
 
+
 app.get('/search', (req, res) => {
-  // console.log('req.query', req.query)
+  console.log('req.query', req.query)
   const keyword = req.query.keyword
   // const restaurant = restaurantList.results.filter(restaurant 
-  const restaurant = restaurant.results.filter(restaurant => {
+  const restaurant = Restaurant.filter(restaurant => {
     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
   })
   res.render('index', { restaurant: restaurant, keyword: keyword })

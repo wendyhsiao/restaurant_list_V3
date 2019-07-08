@@ -2,13 +2,16 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      <a href="/" class="btn btn-outline-primary">back</a>
 
-      <div>
-        <a href="/restaurants/{{{restaurant.id}}}/edit" class="btn btn-outline-primary">編輯</a>
-        <form action="/restaurants/{{{this.id}}}/delete" method="POST" style="display: inline;">
-          <button type="submit" class="btn btn-outline-danger">刪除</button>
-        </form>
+      <div class="d-flex justify-content-between">
+        <a href="/" class="btn btn-outline-primary mb-3"><i class="fas fa-arrow-left pr-2"></i>back</a>
+
+        <div class="edit-delete">
+          <a href="/restaurants/{{{restaurant.id}}}/edit" class="btn btn-outline-primary">編輯</a>
+          <form action="/restaurants/{{{this.id}}}/delete" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-outline-danger">刪除</button>
+          </form>
+        </div>
       </div>
 
       <p class="mb-1">
