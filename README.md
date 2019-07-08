@@ -28,24 +28,26 @@ git colone https://github.com/wendyhsiao/restaurant_CRUD.git
 ![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/down.PNG)
 
 
-切換到restaurant_list目錄下
+1.在終端機(Terminal)切換到restaurant_list目錄下
 
 ```
 cd restaurant_list
 ```
 
-安裝套件
+2.安裝套件
 
 ```
 npm install
 ```
 
-建立種子資料
+3.建立種子資料
 
+```
 cd restaurant_list/models/seeds
 node restaurantSeeder.js
+```
 
-回到restaurant_list目錄下
+4.回到restaurant_list目錄下
 使用nodemon啟動伺服器 
 
 ```
@@ -53,7 +55,7 @@ cd restaurant_list
 nodemon app.js
 ```
 
-在瀏覽器輸入網址 `localhost:3000`即可看到內容
+5.在瀏覽器輸入網址 `localhost:3000`即可看到內容
 
 ## 功能描述
 - 在首頁列出所有的餐廳清單
