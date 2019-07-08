@@ -65,8 +65,11 @@ nodemon app.js
 - 增加刪除按鈕，可把不想要的餐廳刪除
 
 ## 專案畫面
-![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/show1.PNG)
-
-![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/show2.PNG)
-
-![image](https://github.com/wendyhsiao/restaurant_list/blob/master/public/img/show3.PNG)
+#### 首頁 
+![image](https://github.com/wendyhsiao/restaurant_CRUD/blob/master/public/img/show1.PNG)
+#### 餐廳詳細頁面
+![image](https://github.com/wendyhsiao/restaurant_CRUD/blob/master/public/img/show2.PNG)
+#### 修改餐廳頁面
+![image](https://github.com/wendyhsiao/restaurant_CRUD/blob/master/public/img/show3.PNG)
+#### 新增餐廳頁面
+![image](https://github.com/wendyhsiao/restaurant_CRUD/blob/master/public/img/show4.PNG)
