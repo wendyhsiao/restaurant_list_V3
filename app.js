@@ -9,6 +9,9 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
+
 // const restaurantList = require('./restaurant.json') *mongoose取代
 const mongoose = require('mongoose')
 
@@ -87,7 +90,7 @@ app.get('/restaurants/:restaurant_id/edit', (req, res) => {
   })
 })
 
-app.post('/restaurants/:restaurant_id', (req, res) => {
+app.put('/restaurants/:restaurant_id', (req, res) => {
   Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -107,7 +110,7 @@ app.post('/restaurants/:restaurant_id', (req, res) => {
 })
 
 // 刪除 Restaurant
-app.post('/restaurants/:restaurant_id/delete', (req, res) => {
+app.delete('/restaurants/:restaurant_id/delete', (req, res) => {
   Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {
