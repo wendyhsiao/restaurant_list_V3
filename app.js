@@ -41,84 +41,8 @@ const Restaurant = require('./models/restaurant')
 app.use(express.static('public'))
 
 
-// routes setting
-app.get('/', (req, res) => {
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.error(err)
-    return res.render('index', { restaurants: restaurants })
-  })
-  // res.render('index', { restaurant: restaurantList.results })
-})
 
-// 新增一筆 Restaurant 頁面
-app.get('/restaurants/new', (req, res) => {
-  return res.render('new')
-})
 
-app.post('/restaurants', (req, res) => {
-  const restaurant = new Restaurant({
-    name: req.body.name,
-    name_en: req.body.name_en,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description,
-  })
-
-  restaurant.save(err => {
-    if (err) return console.error(err)
-    return res.redirect('/')
-  })
-})
-
-// 顯示一筆 Restaurant 的詳細內容
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
-    if (err) return console.error(err)
-    return res.render('show', { restaurant: restaurant })
-  })
-})
-
-// 修改 Restaurant 頁面
-app.get('/restaurants/:restaurant_id/edit', (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
-    if (err) return console.error(err)
-    return res.render('edit', { restaurant: restaurant })
-  })
-})
-
-app.put('/restaurants/:restaurant_id', (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
-    if (err) return console.error(err)
-    restaurant.name = req.body.name
-    restaurant.name_en = req.body.name_en
-    restaurant.category = req.body.category
-    restaurant.image = req.body.image
-    restaurant.location = req.body.location
-    restaurant.phone = req.body.phone
-    restaurant.google_map = req.body.google_map
-    restaurant.rating = req.body.rating
-    restaurant.description = req.body.description
-    restaurant.save(err => {
-      if (err) return console.error(err)
-      return res.redirect(`/restaurants/${req.params.restaurant_id}`)
-    })
-  })
-})
-
-// 刪除 Restaurant
-app.delete('/restaurants/:restaurant_id/delete', (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
-    if (err) return console.error(err)
-    restaurant.remove(err => {
-      if (err) return console.error(err)
-      return res.redirect('/')
-    })
-  })
-})
 
 
 app.get('/search', (req, res) => {
@@ -130,6 +54,10 @@ app.get('/search', (req, res) => {
   })
   res.render('index', { restaurant: restaurant, keyword: keyword })
 })
+
+// 載入路由器
+app.use('/', require('./routes/home'))
+app.use('/restaurants', require('./routes/restaurant'))
 
 // start and listen on the Express server
 app.listen(port, () => {
