@@ -87,6 +87,10 @@ header {
   width: 140px;
 }
 
+/* .drop-down-list{
+  max-width: 320px;
+} */
+
 @media screen and (max-width: 992px) {
   
   .card img{
