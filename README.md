@@ -68,7 +68,7 @@ nodemon app.js
 
 ## 專案畫面
 #### 首頁 
-![image](https://github.com/wendyhsiao/restaurant_CRUD/blob/master/public/img/show1.PNG)
+![image](https://github.com/wendyhsiao/restaurant_RESTful/blob/master/public/img/show1.PNG)
 #### 餐廳詳細頁面
 ![image](https://github.com/wendyhsiao/restaurant_CRUD/blob/master/public/img/show2.PNG)
 #### 修改餐廳頁面
