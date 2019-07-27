@@ -58,6 +58,7 @@ app.get('/search', (req, res) => {
 // 載入路由器
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
+app.use('/users', require('./routes/user.js'))
 
 // start and listen on the Express server
 app.listen(port, () => {
