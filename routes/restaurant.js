@@ -1,13 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
+const { authenticated } = require('../config/auth.js')  // 載入 auth middleware 裡的 authenticated 方法
+
+
 // 設定 /restaurant 路由
 // 新增一筆 Restaurant 頁面
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   return res.render('new')
 })
 
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   const restaurant = new Restaurant({
     name: req.body.name,
     name_en: req.body.name_en,
@@ -27,7 +30,7 @@ router.post('/', (req, res) => {
 })
 
 // 顯示一筆 Restaurant 的詳細內容
-router.get('/:restaurant_id', (req, res) => {
+router.get('/:restaurant_id', authenticated, (req, res) => {
   Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
     if (err) return console.error(err)
     return res.render('show', { restaurant: restaurant })
@@ -35,14 +38,14 @@ router.get('/:restaurant_id', (req, res) => {
 })
 
 // 修改 Restaurant 頁面
-router.get('/:restaurant_id/edit', (req, res) => {
+router.get('/:restaurant_id/edit', authenticated, (req, res) => {
   Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
     if (err) return console.error(err)
     return res.render('edit', { restaurant: restaurant })
   })
 })
 
-router.put('/:restaurant_id', (req, res) => {
+router.put('/:restaurant_id', authenticated, (req, res) => {
   Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -62,7 +65,7 @@ router.put('/:restaurant_id', (req, res) => {
 })
 
 // 刪除 Restaurant
-router.delete('/:restaurant_id/delete', (req, res) => {
+router.delete('/:restaurant_id/delete', authenticated, (req, res) => {
   Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {

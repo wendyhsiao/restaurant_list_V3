@@ -4,6 +4,8 @@ const app = express()
 const port = 3000
 // require express-handlebars here
 const exphbs = require('express-handlebars')
+const session = require('express-session')
+const passport = require('passport')
 
 // 引用、設定 body-parser
 const bodyParser = require('body-parser')
@@ -40,9 +42,22 @@ const Restaurant = require('./models/restaurant')
 // setting static files
 app.use(express.static('public'))
 
+// 使用 express session 
+app.use(session({
+  secret: 'your secret key',                // secret: 定義一組自己的私鑰（字串)
+}))
+// 使用 Passport 
+app.use(passport.initialize())
+app.use(passport.session())
 
+// 載入 Passport config
+require('./config/passport')(passport)
 
-
+// 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 
 app.get('/search', (req, res) => {
