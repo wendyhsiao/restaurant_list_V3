@@ -6,7 +6,7 @@ const { authenticated } = require('../config/auth.js')  // 載入 auth middlewar
 
 // 設定 /restaurant 路由
 router.get('/', authenticated, (req, res) => {
-  Restaurant.find((err, restaurants) => {
+  Restaurant.find({ userId: req.user._id }, (err, restaurants) => {
     if (err) return console.error(err)
     return res.render('index', { restaurants: restaurants })
   })

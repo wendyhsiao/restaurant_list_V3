@@ -25,6 +25,8 @@
           我的餐廳清單
         </a>
 
+
+
         {{#if isAuthenticated}}
         <a href="/users/logout" class="btn btn-primary">Logout</a>
         {{else}}
@@ -35,6 +37,8 @@
 
     {{#if isAuthenticated}}
     <div class="banner"></div>
+    {{else}}
+    {{!-- <div class="banner"></div> --}}
     {{/if}}
 
   </header>

@@ -37,6 +37,13 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
     require: true,
+  },
+  // 加入 userId，建立跟 User 的關聯
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',  //定義這個屬性是從 User 這個 model 裡取得
+    index: true,
+    required: true
   }
 })
 

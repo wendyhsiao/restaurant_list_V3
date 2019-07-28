@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
-const { authenticated } = require('../config/auth.js')  // 載入 auth middleware 裡的 authenticated 方法
+const { authenticated } = require('../config/auth')  // 載入 auth middleware 裡的 authenticated 方法
 
 
 // 設定 /restaurant 路由
@@ -21,6 +21,7 @@ router.post('/', authenticated, (req, res) => {
     google_map: req.body.google_map,
     rating: req.body.rating,
     description: req.body.description,
+    userId: req.user._id
   })
 
   restaurant.save(err => {
@@ -31,7 +32,7 @@ router.post('/', authenticated, (req, res) => {
 
 // 顯示一筆 Restaurant 的詳細內容
 router.get('/:restaurant_id', authenticated, (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+  Restaurant.findOne({ _id: req.params.restaurant_id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     return res.render('show', { restaurant: restaurant })
   })
@@ -39,14 +40,14 @@ router.get('/:restaurant_id', authenticated, (req, res) => {
 
 // 修改 Restaurant 頁面
 router.get('/:restaurant_id/edit', authenticated, (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+  Restaurant.findOne({ _id: req.params.restaurant_id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     return res.render('edit', { restaurant: restaurant })
   })
 })
 
 router.put('/:restaurant_id', authenticated, (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+  Restaurant.findOne({ _id: req.params.restaurant_id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
     restaurant.name_en = req.body.name_en
@@ -66,7 +67,7 @@ router.put('/:restaurant_id', authenticated, (req, res) => {
 
 // 刪除 Restaurant
 router.delete('/:restaurant_id/delete', authenticated, (req, res) => {
-  Restaurant.findById(req.params.restaurant_id, (err, restaurant) => {
+  Restaurant.findOne({ _id: req.params.restaurant_id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {
       if (err) return console.error(err)
