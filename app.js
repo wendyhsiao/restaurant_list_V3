@@ -21,7 +21,7 @@ const mongoose = require('mongoose')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-mongoose.connect('mongodb://127.0.0.1/restaurant', { useNewUrlParser: true })
+mongoose.connect('mongodb://127.0.0.1/restaurant', { useNewUrlParser: true, useCreateIndex: true })
 
 // mongoose 連線後透過 mongoose.connection 拿到 Connection 的物件
 const db = mongoose.connection
@@ -45,6 +45,8 @@ app.use(express.static('public'))
 // 使用 express session 
 app.use(session({
   secret: 'your secret key',                // secret: 定義一組自己的私鑰（字串)
+  resave: 'false',
+  saveUninitialized: 'false'
 }))
 // 使用 Passport 
 app.use(passport.initialize())
