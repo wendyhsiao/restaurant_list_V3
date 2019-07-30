@@ -2,8 +2,10 @@
 const express = require('express')
 const app = express()
 const port = 3000
-// require express-handlebars here
-const exphbs = require('express-handlebars')
+if (process.env.NODE_ENV !== 'production') {  // 如果不是 production 模式
+  require('dotenv').config()                  // 使用 dotenv 讀取 .env 檔案
+}
+const exphbs = require('express-handlebars')  // require express-handlebars here
 const session = require('express-session')
 const passport = require('passport')
 
@@ -77,6 +79,7 @@ app.get('/search', (req, res) => {
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
 app.use('/users', require('./routes/user.js'))
+app.use('/auth', require('./routes/auths'))
 
 // start and listen on the Express server
 app.listen(port, () => {
