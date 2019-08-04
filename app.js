@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== 'production') {  // 如果不是 production 模式
 const exphbs = require('express-handlebars')  // require express-handlebars here
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash')
 
 // 引用、設定 body-parser
 const bodyParser = require('body-parser')
@@ -57,12 +58,18 @@ app.use(passport.session())
 // 載入 Passport config
 require('./config/passport')(passport)
 
+app.use(flash())
+
 // 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
 app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()      // 辨識使用者是否已經登入的變數，讓 view 可以使用
+
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
+
 
 
 app.get('/search', (req, res) => {

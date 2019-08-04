@@ -1,7 +1,8 @@
 <div class="row mt-5">
-  <div class="col-md-6 m-auto">
+  <div class="col-md-4 m-auto">
     <div class="card card-body">
       <h1 class="text-center mb-3">Login</h1>
+      {{> messages}}
       <form action="/users/login" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
@@ -14,7 +15,9 @@
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Login</button>
-        <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a>
+        <a href="/auth/facebook" class="btn btn-info btn-block">
+          <i class="fab fa-facebook-square mr-2"></i>Facebook Login
+        </a>
       </form>
 
       <p class="lead mt-4">
